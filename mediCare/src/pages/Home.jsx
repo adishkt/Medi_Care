@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DOC_URL } from "../constants";
 import DoctorCard from "../components/DoctorCard";
-import { getSpecialization, specialization } from "../utils/doctorData";
+import { getSpecialization } from "../utils/doctorData";
 import { Link } from "react-router-dom";
 
 function Home() {

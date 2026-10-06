@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DOC_URL } from "../constants";
-import { useParams } from "react-router-dom";
-import { availabilitySchedules, getDoctorAvailability, getSpecialization } from "../utils/doctorData";
+import { Link, useParams } from "react-router-dom";
+import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import "./DoctorDetails.css";
 
 function DoctorDetails() {
@@ -26,35 +26,44 @@ function DoctorDetails() {
     return <h1>Loading...</h1>;
   }
 
-  const { firstName, image } = docInfo;
+  const { firstName, image, email, phone } = docInfo;
 
   const doctorAvailability = getDoctorAvailability(docInfo.id);
   const doctorSpecialization = getSpecialization(docInfo.id);
 
   return (
-    <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0] text-center ">
-      <div className="flex items-center  flex-wrap gap-y-6 gap-x-10 mt-6">
-        <img src={image} className="DocImage" />
-      </div>
-      <div>
-        <h1>{firstName}</h1>
-      <h1>{doctorSpecialization}</h1>
-      </div>
-      
-
-
-
-
-      {Object.entries(doctorAvailability).map(([day, times]) => {
-        return (
-          <div key={day}>
-            <h1>{day}</h1>
-            <h2>{times.join(", ")}</h2>
+    <>
+      <Link to="/">
+        <h2 className="Back-btn">⬅ Back to doctors</h2>
+      </Link>
+      <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0] text-center ">
+        <div className="profile-header">
+          <div className="profile-main">
+            <img src={image} className="DocImage" />
+            <div className="profile-info">
+              <h1>Name : Dr.{firstName}</h1>
+              <h2>Specialization : {doctorSpecialization}</h2>
+              <h2>Email : {email}</h2>
+              <h2>Phone no : {phone}</h2>
+            </div>
           </div>
-        );
-      })}
-    </div>
+        </div>
+        </div>
+
+        <<div>
+          {Object.entries(doctorAvailability).map(([day, times]) => {
+            return (
+              <div key={day}>
+                <h1>{day}</h1>
+                <h2>{times.join(", ")}</h2>
+              </div>
+            );
+          })}
+        </div>>
+    </>
   );
 }
 
 export default DoctorDetails;
+
+// flex items-center  flex-wrap gap-y-6 gap-x-10 mt-6
