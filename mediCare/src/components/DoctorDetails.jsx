@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { DOC_URL } from "../constants";
 import { useParams } from "react-router-dom";
-import { availabilitySchedules } from "../utils/doctorData";
+import { availabilitySchedules, getDoctorAvailability, getSpecialization } from "../utils/doctorData";
+import "./DoctorDetails.css";
 
 function DoctorDetails() {
   const [docInfo, setDocInfo] = useState(null);
@@ -25,15 +26,24 @@ function DoctorDetails() {
     return <h1>Loading...</h1>;
   }
 
-  const { firstName } = docInfo;
+  const { firstName, image } = docInfo;
 
-  const scheduleIndex = (docInfo.id - 1) % availabilitySchedules.length;
-
-  const doctorAvailability = availabilitySchedules[scheduleIndex];
+  const doctorAvailability = getDoctorAvailability(docInfo.id);
+  const doctorSpecialization = getSpecialization(docInfo.id);
 
   return (
-    <div>
-      <h1>{firstName}</h1>
+    <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0] text-center ">
+      <div className="flex items-center  flex-wrap gap-y-6 gap-x-10 mt-6">
+        <img src={image} className="DocImage" />
+      </div>
+      <div>
+        <h1>{firstName}</h1>
+      <h1>{doctorSpecialization}</h1>
+      </div>
+      
+
+
+
 
       {Object.entries(doctorAvailability).map(([day, times]) => {
         return (

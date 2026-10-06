@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DOC_URL } from "../constants";
 import DoctorCard from "../components/DoctorCard";
-import { specialization } from "../utils/doctorData";
+import { getSpecialization, specialization } from "../utils/doctorData";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -24,16 +24,16 @@ function Home() {
 
   return (
     <div>
-      <h1 className="text-6xl w-fit">hello</h1>
-      <div className="flex flex-wrap gap-2">
+      <h1 className="text-8xl ">Our Doctors</h1>
+      <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {doctors.map((users) => {
-          let arr = (users.id - 1) % specialization.length;
+          const doctorSpecialization = getSpecialization(users.id);
 
           return (
             <Link key={users.id} to={"/doctor/" + users.id}>
               <DoctorCard
                 docData={users}
-                specialization={specialization[arr]}
+                specialization={doctorSpecialization}
               />
             </Link>
           );

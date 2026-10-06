@@ -51,3 +51,23 @@ export const availabilitySchedules = [
     Friday: ["02:00 PM", "03:00 PM", "04:00 PM"],
   },
 ];
+
+export const doctorImages = {
+  1: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d",
+  2: "https://images.unsplash.com/photo-1594824476967-48c8b964273f",
+  3: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2",
+  4: "https://images.unsplash.com/photo-1537368910025-700350fe46c7",
+  5: "https://images.unsplash.com/photo-1618498082410-b4aa22193b38",
+  6: "https://images.unsplash.com/photo-1651008376811-b90baee60c1f",
+  7: "https://images.unsplash.com/photo-1622253692010-333f2da6031d",
+};
+
+export const getSpecialization = (id) => {
+  return specialization[(id - 1) % specialization.length];
+};
+
+export const getDoctorAvailability = (id) => {
+  const scheduleIndex = (id - 1) % availabilitySchedules.length;
+
+  return availabilitySchedules[scheduleIndex];
+};
