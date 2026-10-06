@@ -1,8 +1,10 @@
+import logo from "../assets/image.png";
+
 const Footer = () => {
   return (
-    <footer class="w-full h-54 bg-gray-50 border-t border-gray-200 mt-auto">
-      <div>
-        <img class="w-64" src="./src/assets/image.png" alt="logo" />
+    <footer className="w-full h-54 bg-gray-50 border-t border-gray-200">
+      <div className="p-6">
+        <img className="w-64" src={logo} alt="logo" />
       </div>
     </footer>
   );

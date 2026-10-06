@@ -1,9 +1,29 @@
+import App from "../App";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Home from "../pages/Home";
+import { createBrowserRouter } from "react-router-dom"
 
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path:"/",
+        element: <Home />
 
-const Routes = () => {
-  return (
-    <div>Routes</div>
-  )
-}
+      },
+      {
+        path: "/about",
+        element: <About/>,
+      },
+      {
+        path: "/contact",
+        element: <Contact/>,
+      },
+    ],
+  },
+]);
 
-export default Routes
+export default appRouter;
