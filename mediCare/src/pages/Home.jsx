@@ -1,11 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DOC_URL } from "../constants";
+import DoctorCard from "../components/DoctorCard";
+import { specialization } from "../utils/doctorData";
 
 function Home() {
+  const [doctors, setDoctors] = useState([]);
+
   const fetchData = async () => {
-    const data = await fetch(DOC_URL);
-    const json = await data.json();
-    console.log(json);
+    try {
+      const data = await fetch(DOC_URL);
+      const json = await data.json();
+      console.log(json.users);
+      setDoctors(json.users);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   useEffect(() => {
@@ -15,7 +24,19 @@ function Home() {
   return (
     <div>
       <h1 className="text-6xl w-fit">hello</h1>
-      <h1>hello</h1>
+      <div className="flex flex-wrap gap-2">
+        {doctors.map((users) => {
+          let arr = (users.id - 1) % specialization.length;
+
+          return (
+            <DoctorCard
+              key={users.id}
+              docData={users}
+              specialization={specialization[arr]}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
