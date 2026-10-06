@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/image.png";
 
-const Header = () => {
+function Header() {
   return (
     <header className="w-full h-16 bg-white border-b border-gray-200 shadow-sm flex">
       <div>
@@ -23,6 +23,6 @@ const Header = () => {
       </nav>
     </header>
   );
-};
+}
 
 export default Header;

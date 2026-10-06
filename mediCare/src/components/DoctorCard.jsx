@@ -1,8 +1,5 @@
-
-
-const DoctorCard = () => {
- 
+function DoctorCard() {
   return <div>DoctorCard</div>;
-};
+}
 
 export default DoctorCard;

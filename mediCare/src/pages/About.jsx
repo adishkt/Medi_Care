@@ -1,6 +1,6 @@
 
 
-const About = () => {
+function About(){
   return (
     <div>About</div>
   )
