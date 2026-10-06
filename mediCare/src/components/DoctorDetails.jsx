@@ -48,18 +48,35 @@ function DoctorDetails() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
 
-        <<div>
+      <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0]  ">
+        <div className="Availability-info ml-10 mt-6 ">
+          <h1>Availability ::</h1>
           {Object.entries(doctorAvailability).map(([day, times]) => {
             return (
               <div key={day}>
-                <h1>{day}</h1>
-                <h2>{times.join(", ")}</h2>
+                <h2>Day : {day}</h2>
+                <h2>Time : {times.join(", ")}</h2>
               </div>
             );
           })}
-        </div>>
+          <div className="flex justify-center mt-8">
+            <Link to={"/bookAppointment/" + docInfo.id}>
+              <button
+                type="button"
+                className="px-6 py-3 text-white font-semibold
+                 bg-blue-600 hover:bg-blue-700
+                 rounded-lg shadow-sm
+                 transition-all duration-200
+                 hover:shadow-md"
+              >
+                Book Appointment
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

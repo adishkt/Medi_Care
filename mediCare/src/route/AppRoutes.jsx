@@ -1,4 +1,5 @@
 import App from "../App";
+import BookAppointment from "../components/BookAppointment";
 import DoctorDetails from "../components/DoctorDetails";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
@@ -27,6 +28,10 @@ const appRouter = createBrowserRouter([
         path: "/doctor/:docId",
         element: <DoctorDetails />,
       },
+      {
+        path:"/bookAppointment/:docId",
+        element:<BookAppointment/>
+      }
     ],
     errorElement: <Error />,
   },
