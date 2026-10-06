@@ -1,1 +1,1 @@
-export const DOC_URL = "https://dummyjson.com/users";
+export const DOC_URL = "https://dummyjson.com/users/";

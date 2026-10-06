@@ -9,7 +9,7 @@ const Error = () => {
       <h2>
         {err.status}:{err.statusText}
       </h2>
-      <h3>{err.error.message}</h3>
+      {/* <h3>{err.error.message}</h3> */}
     </div>
   );
 };
