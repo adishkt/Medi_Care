@@ -3,16 +3,18 @@ import { DOC_URL } from "../constants";
 import DoctorCard from "../components/DoctorCard";
 import { getSpecialization, specialization } from "../utils/doctorData";
 import { Link } from "react-router-dom";
+import useDebounce from "../hooks/useDebounce";
+
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
-
   const [selectedText, setSelectedText] = useState("");
+  const debounceText=useDebounce(selectedText,500);
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
 
   const filterDoctor = useMemo(() => {
     return  doctors.filter((res) => {
-      const filterData = res.firstName.toLowerCase().includes(selectedText.toLowerCase());
+      const filterData = res.firstName.toLowerCase().includes(debounceText.toLowerCase());
 
       const specializationValue =
         selectedSpecialization === "" ||
@@ -20,7 +22,7 @@ function Home() {
 
       return filterData && specializationValue;
     });
-  },[doctors,selectedSpecialization,selectedText]);
+  },[doctors,selectedSpecialization,debounceText]);
 
   const fetchData = async () => {
     try {
