@@ -1,5 +1,5 @@
 function AppointmentCard(props) {
-  const { appointmentData } = props;
+  const { appointmentData, handleCancel } = props;
 
   const { doctorName, specialization, selectDate, selectedTime } =
     appointmentData;
@@ -19,10 +19,10 @@ function AppointmentCard(props) {
         <h1>Age : {age}</h1>
         <h1>Gender : {gender}</h1>
       </div>
-      <div
-        className="w-50 py-3 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition-colors text-center "
-      >
-        <button>Cancel Appointment</button>
+      <div className="w-50 py-3 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition-colors text-center ">
+        <button onClick={() => handleCancel(appointmentData.id)}>
+          Cancel Appointment
+        </button>
       </div>
     </div>
   );

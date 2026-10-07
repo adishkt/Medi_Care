@@ -89,6 +89,8 @@ function BookAppointment() {
   const availableTimes = doctorAvailability[selectDay];
 
   const handleBook = async () => {
+    console.log("BOOKING CLICKED");
+    console.log(appointmentData);
     const validateForm = handleValidateForm(
       formValue,
       selectedDate,
@@ -99,11 +101,18 @@ function BookAppointment() {
     if (!validateForm) return;
 
     try {
+      console.log("BEFORE FETCH");
       const response = await fetch("http://localhost:3000/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(appointmentData),
       });
+      console.log("After FETCH");
+
+      console.log("STATUS:", response.status);
+
+      const result = await response.json();
+      console.log("SERVER RESPONSE:", result);
 
       if (!response.ok) {
         throw new Error("Failed to book appointment");

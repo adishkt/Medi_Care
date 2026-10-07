@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
 import AppointmentCard from "../components/AppointmentCard";
 
 function MyAppointments() {
   const [myAppointment, setMyAppointment] = useState([]);
-  const [loading,setLoading]=useState(true);
+  const [loading, setLoading] = useState(true);
 
   const fetchAppointment = async () => {
     try {
@@ -20,13 +19,22 @@ function MyAppointments() {
     }
   };
 
+  const handleCancel = useCallback(
+    async (id) => {
+      await fetch("http://localhost:3000/appointments/" + id, {
+        method: "DELETE",
+      });
+
+      fetchAppointment();
+    },
+    [],
+  );
 
   useEffect(() => {
     fetchAppointment();
   }, []);
 
-
-  if(loading){
+  if (loading) {
     return <h1>Loading...</h1>;
   }
 
@@ -34,23 +42,21 @@ function MyAppointments() {
     return <h1>No appointments for you...</h1>;
   }
 
-  function handleCancel(){
-    
-  }
-
-  
-
   return (
     <div>
       <h1 className="text-8xl ">Your Appointments</h1>
       <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {myAppointment.map((appointment) => {
-        return (<AppointmentCard appointmentData={appointment}/>);
-      })}
-          
+          return (
+            <AppointmentCard
+              key={appointment.id}
+              appointmentData={appointment}
+              handleCancel={handleCancel}
+            />
+          );
+        })}
       </div>
     </div>
-    
   );
 }
 

@@ -1,21 +1,4 @@
 {
-  "appointments": [
-    {
-      "doctorId": 2,
-      "doctorName": "Dr. Michael Williams",
-      "specialization": "Dermatologist",
-      "selectDate": "2002-02-26",
-      "selectedTime": "10:00 AM",
-      "patient": {
-        "name": "adish",
-        "age": "22",
-        "email": "Adish@gmail.com",
-        "phone": "9778054338",
-        "place": "kerala",
-        "gender": "Male"
-      },
-      "id": "trXDoabE1JY"
-    }
-  ],
+  "appointments": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

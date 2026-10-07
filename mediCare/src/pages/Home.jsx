@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
+  const [filterDoctor,SetFilterDoctor]=useState([]);
+  const [se]
 
   const fetchData = async () => {
     try {
