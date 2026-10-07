@@ -6,6 +6,7 @@ import Contact from "../pages/Contact";
 import Error from "../pages/Error";
 import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
+import MyAppointments from "../pages/MyAppointments";
 
 const appRouter = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const appRouter = createBrowserRouter([
       {
         path:"/bookAppointment/:docId",
         element:<BookAppointment/>
+      },
+      {
+        path:"/appointments",
+        element:<MyAppointments />
       }
     ],
     errorElement: <Error />,
