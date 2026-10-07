@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { DOC_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
 import "./BookAppointment.css";
-import { getDoctorAvailability } from "../utils/doctorData";
+import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import { handleValidateForm } from "../utils/validateForm";
 
 function BookAppointment() {
@@ -85,7 +85,45 @@ function BookAppointment() {
   const selectDay = days[date.getDay()];
 
   const doctorAvailability = getDoctorAvailability(infoDoc.id);
+  const doctorSpecialization = getSpecialization(infoDoc.id);
   const availableTimes = doctorAvailability[selectDay];
+
+  const handleBook = async () => {
+    const validateForm = handleValidateForm(
+      formValue,
+      selectedDate,
+      selectedTime,
+      nameRef,
+    );
+
+    if (!validateForm) return;
+
+    try {
+      const response = await fetch("http://localhost:3000/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(appointmentData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to book appointment");
+      }
+
+      alert("Appointment Booking is successfully!!!!");
+    } catch (error) {
+      console.log(error);
+      alert("failed to book appointment");
+    }
+  };
+
+  const appointmentData = {
+    doctorId: infoDoc.id,
+    doctorName: `Dr. ${firstName} ${lastName}`,
+    specialization: doctorSpecialization,
+    selectDate: selectedDate,
+    selectedTime: selectedTime,
+    patient: formValue,
+  };
 
   return (
     <>
@@ -100,7 +138,7 @@ function BookAppointment() {
             <h2 className="docName">
               Dr.{firstName} {lastName}
             </h2>
-            <p className="doctor-specialization">Cardiologist</p>
+            <p className="doctor-specialization">{doctorSpecialization}</p>
           </div>
           <div className="form">
             <h3 className="color-black">Select Date For Appointment</h3>
@@ -212,17 +250,7 @@ function BookAppointment() {
                 <option value="Female">Female</option>
               </select>
 
-              <button
-                className="make-appointment"
-                onClick={() =>
-                  handleValidateForm(
-                    formValue,
-                    selectedDate,
-                    selectedTime,
-                    nameRef,
-                  )
-                }
-              >
+              <button className="make-appointment" onClick={handleBook}>
                 Make Appointment
               </button>
             </div>
