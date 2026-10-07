@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DOC_URL } from "../constants";
 import DoctorCard from "../components/DoctorCard";
 import { getSpecialization, specialization } from "../utils/doctorData";
@@ -6,9 +6,21 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
-  const [filterDoctor, setFilterDoctor] = useState([]);
+
   const [selectedText, setSelectedText] = useState("");
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
+
+  const filterDoctor = useMemo(() => {
+    return  doctors.filter((res) => {
+      const filterData = res.firstName.toLowerCase().includes(selectedText.toLowerCase());
+
+      const specializationValue =
+        selectedSpecialization === "" ||
+        getSpecialization(res.id) === selectedSpecialization;
+
+      return filterData && specializationValue;
+    });
+  },[doctors,selectedSpecialization,selectedText]);
 
   const fetchData = async () => {
     try {
@@ -16,7 +28,6 @@ function Home() {
       const json = await data.json();
       console.log(json.users);
       setDoctors(json.users);
-      setFilterDoctor(json.users);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -36,17 +47,6 @@ function Home() {
           value={selectedText}
           onChange={(e) => setSelectedText(e.target.value)}
         />
-        <button
-          className="w-20 py-1 rounded-lg bg-gray-500 text-white font-semibold hover:bg-blue-600 transition-colors text-center"
-          onClick={() => {
-            const filterData = doctors.filter((res) =>
-              res.firstName.toLowerCase().includes(selectedText.toLowerCase()),
-            );
-            setFilterDoctor(filterData);
-          }}
-        >
-          Search
-        </button>
         <div>
           <select
             value={selectedSpecialization}
@@ -55,7 +55,7 @@ function Home() {
             <option value={""}>All Specializations</option>
             {specialization.map((specialization) => {
               return (
-                <option key={specialization} value={specialization} >
+                <option key={specialization} value={specialization}>
                   {specialization}
                 </option>
               );
