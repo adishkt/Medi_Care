@@ -7,6 +7,7 @@ import useDebounce from "../hooks/useDebounce";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/searchBar";
 import FilterBox from "../components/FilterBox";
+import CardList from "../components/CardList";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
@@ -71,20 +72,7 @@ function Home() {
         />
       </div>
 
-      <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {currentDoctors.map((users) => {
-          const doctorSpecialization = getSpecialization(users.id);
-
-          return (
-            <Link key={users.id} to={"/doctor/" + users.id}>
-              <DoctorCard
-                docData={users}
-                specialization={doctorSpecialization}
-              />
-            </Link>
-          );
-        })}
-      </div>
+      <CardList currentDoctors={currentDoctors} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
