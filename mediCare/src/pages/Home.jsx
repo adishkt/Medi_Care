@@ -4,17 +4,21 @@ import DoctorCard from "../components/DoctorCard";
 import { getSpecialization, specialization } from "../utils/doctorData";
 import { Link } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
-
+import Pagination from "../components/Pagination";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
   const [selectedText, setSelectedText] = useState("");
-  const debounceText=useDebounce(selectedText,500);
+  const debounceText = useDebounce(selectedText, 500);
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const doctorsPerPage = 6;
 
   const filterDoctor = useMemo(() => {
-    return  doctors.filter((res) => {
-      const filterData = res.firstName.toLowerCase().includes(debounceText.toLowerCase());
+    return doctors.filter((res) => {
+      const filterData = res.firstName
+        .toLowerCase()
+        .includes(debounceText.toLowerCase());
 
       const specializationValue =
         selectedSpecialization === "" ||
@@ -22,7 +26,7 @@ function Home() {
 
       return filterData && specializationValue;
     });
-  },[doctors,selectedSpecialization,debounceText]);
+  }, [doctors, selectedSpecialization, debounceText]);
 
   const fetchData = async () => {
     try {
@@ -39,12 +43,25 @@ function Home() {
     fetchData();
   }, []);
 
+  useEffect(()=>{
+    setCurrentPage(1);
+  },[debounceText,selectedSpecialization]);
+
+  const totalPages = Math.ceil(filterDoctor.length / doctorsPerPage);
+  const startingIndex = (currentPage - 1) * doctorsPerPage;
+
+  const currentDoctors = filterDoctor.slice(
+    startingIndex,
+    startingIndex + doctorsPerPage,
+  );
+
   return (
     <div>
       <h1 className="text-8xl ">Our Doctors</h1>
       <div className="p-10">
         <input
           type="text"
+          placeholder="Search by Name"
           className=" border border-black m-2"
           value={selectedText}
           onChange={(e) => setSelectedText(e.target.value)}
@@ -67,7 +84,7 @@ function Home() {
       </div>
 
       <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filterDoctor.map((users) => {
+        {currentDoctors.map((users) => {
           const doctorSpecialization = getSpecialization(users.id);
 
           return (
@@ -80,6 +97,11 @@ function Home() {
           );
         })}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

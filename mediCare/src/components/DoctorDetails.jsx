@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { DOC_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
 import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import "./DoctorDetails.css";
-import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 function DoctorDetails() {
@@ -41,7 +40,7 @@ function DoctorDetails() {
         <h2 className="Back-btn">⬅ Back to doctors</h2>
       </Link>
       <div
-        className={`w-auto h-auto p-5 m-5    text-center ${
+        className={`w-auto h-auto p-5 m-5 rounded-xl   text-center ${
           theme === "dark"
             ? "bg-gray-800 text-white"
             : "bg-[#f0f0f0] text-black"
@@ -60,7 +59,13 @@ function DoctorDetails() {
         </div>
       </div>
 
-      <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0]  ">
+      <div
+        className={`w-auto h-auto p-5 m-5  rounded-xl  text-center ${
+          theme === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-[#f0f0f0] text-black"
+        } `}
+      >
         <div className="Availability-info ml-10 mt-6 ">
           <h1>Availability ::</h1>
           {Object.entries(doctorAvailability).map(([day, times]) => {

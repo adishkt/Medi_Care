@@ -1,15 +1,17 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState, useContext } from "react";
 import { DOC_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
 import "./BookAppointment.css";
 import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import { handleValidateForm } from "../utils/validateForm";
+import { ThemeContext } from "../context/ThemeContext";
 
 function BookAppointment() {
   const [infoDoc, setInfoDoc] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const { docId } = useParams();
+  const { theme } = useContext(ThemeContext);
 
   const nameRef = useRef(null);
 
@@ -139,7 +141,13 @@ function BookAppointment() {
       <Link to={"/doctor/" + infoDoc.id}>
         <h2 className="Back-btn">⬅ Back to doctor</h2>
       </Link>
-      <div className="appointment">
+      <div
+        className={`appointment  ${
+          theme === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-[#f0f0f0] text-black"
+        }`}
+      >
         <div className="appointment-card">
           <h1 className="title">Book Appointment</h1>
 
