@@ -5,6 +5,8 @@ import { getSpecialization, specialization } from "../utils/doctorData";
 import { Link } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
 import Pagination from "../components/Pagination";
+import SearchBar from "../components/searchBar";
+import FilterBox from "../components/FilterBox";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
@@ -43,9 +45,9 @@ function Home() {
     fetchData();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setCurrentPage(1);
-  },[debounceText,selectedSpecialization]);
+  }, [debounceText, selectedSpecialization]);
 
   const totalPages = Math.ceil(filterDoctor.length / doctorsPerPage);
   const startingIndex = (currentPage - 1) * doctorsPerPage;
@@ -58,29 +60,15 @@ function Home() {
   return (
     <div>
       <h1 className="text-8xl ">Our Doctors</h1>
-      <div className="p-10">
-        <input
-          type="text"
-          placeholder="Search by Name"
-          className=" border border-black m-2"
+      <div className="p-10 flex">
+        <SearchBar
           value={selectedText}
           onChange={(e) => setSelectedText(e.target.value)}
         />
-        <div>
-          <select
-            value={selectedSpecialization}
-            onChange={(e) => setSelectedSpecialization(e.target.value)}
-          >
-            <option value={""}>All Specializations</option>
-            {specialization.map((specialization) => {
-              return (
-                <option key={specialization} value={specialization}>
-                  {specialization}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+        <FilterBox
+          value={selectedSpecialization}
+          onChange={(e) => setSelectedSpecialization(e.target.value)}
+        />
       </div>
 
       <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
