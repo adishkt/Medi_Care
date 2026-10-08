@@ -15,7 +15,7 @@ function useLocalStorage(key,initialValue){
     
     useEffect(()=>{
         localStorage.setItem(key,theme);
-    },[theme]);
+    },[key,theme]);
 
 
     return[theme,setTheme];
