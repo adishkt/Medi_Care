@@ -5,7 +5,7 @@ import DoctorCard from "./DoctorCard";
 function CardList(props) {
   const { doctors } = props;
   return (
-    <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="w-full px-4 sm:px-6 lg:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {doctors.map((users) => {
         const doctorSpecialization = getSpecialization(users.id);
 

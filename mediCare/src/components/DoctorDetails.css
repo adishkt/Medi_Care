@@ -1,12 +1,8 @@
 .DocImage {
-  width: 300px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-h1 {
-  font-size: larger;
 }
 
 .info {
@@ -17,8 +13,8 @@ h1 {
 
 .profile-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 20px;
   padding-bottom: 20px;
@@ -26,47 +22,77 @@ h1 {
 
 .profile-main {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 40px;
+}
+
+.profile-info {
+  text-align: left;
 }
 
 .profile-info h1 {
-  margin: 20px 0 8px 0;
-  font-size: 34px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  margin: 10px 0 15px;
+  font-size: 32px;
   font-weight: bold;
 }
 
 .profile-info h2 {
-  margin: 0 0 10px 0;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-top: 10px;
+  margin: 10px 0;
+  font-size: 18px;
 }
 
 .Back-btn {
-  margin-left: 10px;
-  padding: 3px;
+  margin: 20px;
+  padding: 8px 12px;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.Availability-info {
+  max-width: 900px;
+  margin: auto;
 }
 
 .Availability-info h1 {
-  margin: 20px 0 8px 0;
-  font-size: 34px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  margin: 10px 0 20px;
+  font-size: 28px;
   font-weight: bold;
 }
 
 .Availability-info h2 {
-  margin: 0 0 10px 0;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-top: 10px;
-  margin-left: 45px;
+  margin: 8px 0;
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+@media (max-width: 640px) {
+  .profile-main {
+    flex-direction: column;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .DocImage {
+    width: 170px;
+    height: 170px;
+  }
+
+  .profile-info h1 {
+    font-size: 26px;
+  }
+
+  .profile-info h2 {
+    font-size: 16px;
+  }
+
+  .Availability-info h1 {
+    font-size: 24px;
+  }
+
+  .Availability-info h2 {
+    font-size: 16px;
+    margin-left: 0;
+  }
 }

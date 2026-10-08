@@ -5,6 +5,8 @@ import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import "./DoctorDetails.css";
 import { ThemeContext } from "../context/ThemeContext";
 import Loader from "./Loader";
+import maleDoctor from "../assets/male_doctor_card.png";
+import femaleDoctor from "../assets/female_doctor_card.png";
 
 function DoctorDetails() {
   const { theme } = useContext(ThemeContext);
@@ -29,7 +31,9 @@ function DoctorDetails() {
     return <Loader />;
   }
 
-  const { firstName, image, email, phone } = docInfo;
+  const { firstName, email, phone, gender } = docInfo;
+
+  const doctorImage = gender === "male" ? maleDoctor : femaleDoctor;
 
   const doctorAvailability = getDoctorAvailability(docInfo.id);
   const doctorSpecialization = getSpecialization(docInfo.id);
@@ -40,15 +44,15 @@ function DoctorDetails() {
         <h2 className="Back-btn">⬅ Back to doctors</h2>
       </Link>
       <div
-        className={`w-auto h-auto p-5 m-5 rounded-xl   text-center ${
+        className={`w-auto h-auto p-6 m-5 rounded-2xl text-center border shadow-md ${
           theme === "dark"
-            ? "bg-gray-800 text-white"
-            : "bg-[#f0f0f0] text-black"
-        } `}
+            ? "bg-slate-800 text-white border-slate-700"
+            : "bg-slate-50 text-slate-800 border-blue-100"
+        }`}
       >
         <div className="profile-header">
           <div className="profile-main">
-            <img src={image} className="DocImage" />
+            <img src={doctorImage} className="DocImage" />
             <div className="profile-info">
               <h1>Name : Dr.{firstName}</h1>
               <h2>Specialization : {doctorSpecialization}</h2>
@@ -60,11 +64,11 @@ function DoctorDetails() {
       </div>
 
       <div
-        className={`w-auto h-auto p-5 m-5  rounded-xl  text-center ${
+        className={`w-auto h-auto p-6 m-5 rounded-2xl text-center border shadow-md ${
           theme === "dark"
-            ? "bg-gray-800 text-white"
-            : "bg-[#f0f0f0] text-black"
-        } `}
+            ? "bg-slate-800 text-white border-slate-700"
+            : "bg-slate-50 text-slate-800 border-blue-100"
+        }`}
       >
         <div className="Availability-info ml-10 mt-6 ">
           <h1>Availability ::</h1>

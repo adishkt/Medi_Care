@@ -11,7 +11,7 @@ function FilterBox(props) {
       <select
         value={value}
         onChange={onChange}
-        className={`border m-2 px-3 py-2 ${
+        className={`border w-90 rounded-xl m-2 px-3 py-2 ${
           theme === "dark"
             ? "bg-gray-800 text-white border-gray-600"
             : "bg-white text-black border-gray-300"

@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import FilterBox from "../components/FilterBox";
 import CardList from "../components/CardList";
 import Loader from "../components/Loader";
+import homeImage from "../assets/homeimage.png";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
@@ -72,10 +73,17 @@ function Home() {
 
   return (
     <div>
-      <h1 className="text-4xl sm:text-6xl lg:!text-8xl font-bold text-center mt-2">
+      <div className="px-4 sm:px-6 lg:px-10 pt-4">
+        <img
+          className="w-full rounded-2xl shadow-md"
+          src={homeImage}
+          alt="Hero image"
+        />
+      </div>
+      <h1 className="text-4xl sm:text-5xl lg:!text-6xl font-bold text-center mt-12 mb-6">
         Our Doctors
       </h1>
-      <div className="p-10 flex flex-col sm:flex-row justify-center items-center gap-3">
+      <div className="px-4 sm:px-6 py-6 flex flex-col sm:flex-row justify-center items-center gap-3">
         <SearchBar
           value={selectedText}
           onChange={(e) => setSelectedText(e.target.value)}
@@ -85,11 +93,13 @@ function Home() {
           onChange={(e) => setSelectedSpecialization(e.target.value)}
         />
       </div>
-      {currentDoctors.length === 0 ? (
-        <h2 className="text-center m-10">No doctors found.</h2>
-      ) : (
-        <CardList doctors={currentDoctors} />
-      )}
+      <div className="w-full px-4 sm:px-6 lg:px-10">
+        {currentDoctors.length === 0 ? (
+          <h2 className="text-center m-10">No doctors found.</h2>
+        ) : (
+          <CardList doctors={currentDoctors} />
+        )}
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

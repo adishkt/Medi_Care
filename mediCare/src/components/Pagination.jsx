@@ -15,13 +15,19 @@ function Pagination(props) {
       </button>
 
       {pages.map((page) => {
-        return(
-        <button
-          key={page}
-          onClick={() => setCurrentPage(page)}
-        >
-          {page}
-        </button>);
+        return (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`px-3 py-1 rounded ${
+              currentPage === page
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-black"
+            }`}
+          >
+            {page}
+          </button>
+        );
       })}
 
       <button

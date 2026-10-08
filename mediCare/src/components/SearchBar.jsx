@@ -8,7 +8,7 @@ function SearchBar(props) {
     <input
       type="text"
       placeholder="Search by Name"
-      className={`!rounded-lg border px-4 py-2 outline-none ${
+      className={`!rounded-lg w-90 border px-4 py-2 outline-none ${
         theme === "dark"
           ? "bg-gray-800 text-white border-gray-600 placeholder-gray-400"
           : "bg-white text-black border-gray-300 placeholder-gray-500"
