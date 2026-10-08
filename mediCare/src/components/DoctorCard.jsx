@@ -16,13 +16,13 @@ function DoctorCard(props) {
       }`}
     >
       <img src={image} />
-      <h1>
+      <h1 className="!text-3xl font-bold p-2">
         Dr.{firstName} {lastName} , {age}
       </h1>
-      <h1>{gender}</h1>
-      <h1>{email}</h1>
-      <h1>{phone}</h1>
-      <h1>{specialization}</h1>
+      <h1 className="!text-1xl p-2">{gender}</h1>
+      <h1 className="!text-1xl p-2">{email}</h1>
+      <h1 className="!text-1xl p-2">{phone}</h1>
+      <h1 className="!text-1xl p-2 text-sky-400 font-bold">{specialization}</h1>
     </div>
   );
 }

@@ -8,7 +8,6 @@ import Loader from "./Loader";
 
 function DoctorDetails() {
   const { theme } = useContext(ThemeContext);
-
   const [docInfo, setDocInfo] = useState(null);
   const { docId } = useParams();
 

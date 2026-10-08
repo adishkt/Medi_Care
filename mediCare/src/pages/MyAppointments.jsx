@@ -37,12 +37,12 @@ function MyAppointments() {
   }
 
   if (myAppointment.length === 0) {
-    return <h1>No appointments for you...</h1>;
+    return <h1 className="text-center m-10">No appointments for you...</h1>;
   }
 
   return (
     <div>
-      <h1 className="text-8xl ">Your Appointments</h1>
+      <h1 className="!text-4xl text-center m-10 font-bold">Your Appointments</h1>
       <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {myAppointment.map((appointment) => {
           return (

@@ -1,7 +1,11 @@
-
-export function handleValidateForm(formValue, selectedDate, selectedTime , nameRef) {
-  if (!formValue.name.trim()) {
-    alert("Please enter patient name");
+export function handleValidateForm(
+  formValue,
+  selectedDate,
+  selectedTime,
+  nameRef,
+) {
+  if (!formValue.name.trim() || !/^[A-Za-z ]+$/.test(formValue.name)) {
+    alert("Please enter patient name or Invaild Name");
     nameRef.current.focus();
     return false;
   }
@@ -11,7 +15,7 @@ export function handleValidateForm(formValue, selectedDate, selectedTime , nameR
     return false;
   }
 
-  if (!formValue.email.includes("@")) {
+  if (!formValue.email.includes("@") || !formValue.email.includes(".")) {
     alert("Please enter a valid email");
     return false;
   }

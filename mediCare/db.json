@@ -1,4 +1,21 @@
 {
-  "appointments": [],
+  "appointments": [
+    {
+      "doctorId": 3,
+      "doctorName": "Dr. Sophia Brown",
+      "specialization": "Neurologist",
+      "selectDate": "2026-10-20",
+      "selectedTime": "09:00 AM",
+      "patient": {
+        "name": "ad",
+        "age": "23",
+        "email": "asdsds@gmail.com",
+        "phone": "1234567890",
+        "place": "ker",
+        "gender": "Male"
+      },
+      "id": 1
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
