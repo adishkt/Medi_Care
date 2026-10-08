@@ -13,6 +13,7 @@ function Home() {
   const [selectedText, setSelectedText] = useState("");
   const debounceText = useDebounce(selectedText, 500);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const doctorsPerPage = 6;
@@ -41,6 +42,7 @@ function Home() {
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
+      setError(true);
     }
   };
 
@@ -56,6 +58,10 @@ function Home() {
     return <Loader />;
   }
 
+  if (error) {
+    return <h1>Failed to fetch the data of doctors.Please Try Again!!</h1>;
+  }
+
   const totalPages = Math.ceil(filterDoctor.length / doctorsPerPage);
   const startingIndex = (currentPage - 1) * doctorsPerPage;
 
@@ -66,8 +72,10 @@ function Home() {
 
   return (
     <div>
-      <h1 className="text-8xl ">Our Doctors</h1>
-      <div className="p-10 flex">
+      <h1 className="text-4xl sm:text-6xl lg:!text-8xl font-bold text-center mt-2">
+        Our Doctors
+      </h1>
+      <div className="p-10 flex flex-col sm:flex-row justify-center items-center gap-3">
         <SearchBar
           value={selectedText}
           onChange={(e) => setSelectedText(e.target.value)}
@@ -77,8 +85,11 @@ function Home() {
           onChange={(e) => setSelectedSpecialization(e.target.value)}
         />
       </div>
-
-      <CardList currentDoctors={currentDoctors} />
+      {currentDoctors.length === 0 ? (
+        <h2 className="text-center m-10">No doctors found.</h2>
+      ) : (
+        <CardList doctors={currentDoctors} />
+      )}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
