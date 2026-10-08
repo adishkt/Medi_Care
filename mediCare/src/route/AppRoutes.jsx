@@ -7,6 +7,7 @@ import Error from "../pages/Error";
 import Home from "../pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import MyAppointments from "../pages/MyAppointments";
+import NotFound from "../pages/NotFound";
 
 const appRouter = createBrowserRouter([
   {
@@ -30,13 +31,17 @@ const appRouter = createBrowserRouter([
         element: <DoctorDetails />,
       },
       {
-        path:"/bookAppointment/:docId",
-        element:<BookAppointment/>
+        path: "/bookAppointment/:docId",
+        element: <BookAppointment />,
       },
       {
-        path:"/appointments",
-        element:<MyAppointments />
-      }
+        path: "/appointments",
+        element: <MyAppointments />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
     errorElement: <Error />,
   },
