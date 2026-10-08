@@ -1,5 +1,9 @@
 function Pagination(props) {
   const { currentPage, totalPages, setCurrentPage } = props;
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
   return (
     <div className="flex justify-center gap-3 p-5">
       <button
@@ -10,17 +14,15 @@ function Pagination(props) {
         Previous
       </button>
 
-      {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-        (page) => (
-          <button
-            className="text-black"
-            key={page}
-            onClick={() => setCurrentPage(page)}
-          >
-            {page}
-          </button>
-        ),
-      )}
+      {pages.map((page) => {
+        return(
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+        >
+          {page}
+        </button>);
+      })}
 
       <button
         disabled={currentPage === totalPages}
