@@ -7,7 +7,6 @@ import { handleValidateForm } from "../utils/validateForm";
 import { ThemeContext } from "../context/ThemeContext";
 import Loader from "./Loader";
 
-
 function BookAppointment() {
   const [infoDoc, setInfoDoc] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
@@ -79,7 +78,7 @@ function BookAppointment() {
   }, []);
 
   if (infoDoc === null) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   const { firstName, lastName } = infoDoc;
@@ -105,11 +104,14 @@ function BookAppointment() {
     if (!validateForm) return;
 
     try {
-      const response = await fetch("http://localhost:3000/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(appointmentData),
-      });
+      const response = await fetch(
+        "https://medi-care-dny6.onrender.com/appointments",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(appointmentData),
+        },
+      );
 
       if (!response.ok) {
         throw new Error("Failed to book appointment");

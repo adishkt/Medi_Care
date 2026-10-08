@@ -8,7 +8,9 @@ function MyAppointments() {
 
   const fetchAppointment = async () => {
     try {
-      const data = await fetch("http://localhost:3000/appointments");
+      const data = await fetch(
+        "https://medi-care-dny6.onrender.com/appointments",
+      );
       const json = await data.json();
       console.log(json);
       setMyAppointment(json);
@@ -21,7 +23,7 @@ function MyAppointments() {
   };
 
   const handleCancel = useCallback(async (id) => {
-    await fetch("http://localhost:3000/appointments/" + id, {
+    await fetch("https://medi-care-dny6.onrender.com/appointments/" + id, {
       method: "DELETE",
     });
 
@@ -42,7 +44,9 @@ function MyAppointments() {
 
   return (
     <div>
-      <h1 className="!text-4xl text-center m-10 font-bold">Your Appointments</h1>
+      <h1 className="!text-4xl text-center m-10 font-bold">
+        Your Appointments
+      </h1>
       <div className="flex flex-wrap  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {myAppointment.map((appointment) => {
           return (
