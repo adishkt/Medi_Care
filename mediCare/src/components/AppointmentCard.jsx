@@ -1,11 +1,19 @@
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+
 function AppointmentCard(props) {
+  const { theme } = useContext(ThemeContext);
   const { appointmentData, handleCancel } = props;
 
   const { doctorName, specialization, selectDate, selectedTime } =
     appointmentData;
   const { name, age, gender } = appointmentData.patient;
   return (
-    <div className="w-auto h-auto p-5 m-5  bg-[#f0f0f0]">
+    <div
+      className={`w-auto h-auto p-5 m-5 rounded-xl ${
+        theme === "dark" ? "bg-gray-800 text-white" : "bg-[#f0f0f0] text-black"
+      } `}
+    >
       <div className="m-4">
         <h1>{doctorName}</h1>
         <h1>{specialization}</h1>

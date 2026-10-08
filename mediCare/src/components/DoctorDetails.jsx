@@ -3,8 +3,12 @@ import { DOC_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
 import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import "./DoctorDetails.css";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 function DoctorDetails() {
+  const { theme } = useContext(ThemeContext);
+
   const [docInfo, setDocInfo] = useState(null);
   const { docId } = useParams();
 
@@ -36,7 +40,13 @@ function DoctorDetails() {
       <Link to="/">
         <h2 className="Back-btn">⬅ Back to doctors</h2>
       </Link>
-      <div className="w-auto h-auto p-5 m-5   bg-[#f0f0f0] text-center ">
+      <div
+        className={`w-auto h-auto p-5 m-5    text-center ${
+          theme === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-[#f0f0f0] text-black"
+        } `}
+      >
         <div className="profile-header">
           <div className="profile-main">
             <img src={image} className="DocImage" />
