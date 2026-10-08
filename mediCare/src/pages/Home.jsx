@@ -3,7 +3,7 @@ import { DOC_URL } from "../constants";
 import { getSpecialization } from "../utils/doctorData";
 import useDebounce from "../hooks/useDebounce";
 import Pagination from "../components/Pagination";
-import SearchBar from "../components/searchBar";
+import SearchBar from "../components/SearchBar";
 import FilterBox from "../components/FilterBox";
 import CardList from "../components/CardList";
 import Loader from "../components/Loader";
