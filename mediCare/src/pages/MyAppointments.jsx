@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import AppointmentCard from "../components/AppointmentCard";
+import Loader from "../components/Loader";
 
 function MyAppointments() {
   const [myAppointment, setMyAppointment] = useState([]);
@@ -19,23 +20,20 @@ function MyAppointments() {
     }
   };
 
-  const handleCancel = useCallback(
-    async (id) => {
-      await fetch("http://localhost:3000/appointments/" + id, {
-        method: "DELETE",
-      });
+  const handleCancel = useCallback(async (id) => {
+    await fetch("http://localhost:3000/appointments/" + id, {
+      method: "DELETE",
+    });
 
-      fetchAppointment();
-    },
-    [],
-  );
+    fetchAppointment();
+  }, []);
 
   useEffect(() => {
     fetchAppointment();
   }, []);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   if (myAppointment.length === 0) {

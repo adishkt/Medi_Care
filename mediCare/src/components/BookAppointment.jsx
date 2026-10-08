@@ -5,6 +5,8 @@ import "./BookAppointment.css";
 import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import { handleValidateForm } from "../utils/validateForm";
 import { ThemeContext } from "../context/ThemeContext";
+import Loader from "./Loader";
+
 
 function BookAppointment() {
   const [infoDoc, setInfoDoc] = useState(null);
@@ -77,7 +79,7 @@ function BookAppointment() {
   }, []);
 
   if (infoDoc === null) {
-    return <h1>Loading...</h1>;
+    return <Loader/>;
   }
 
   const { firstName, lastName } = infoDoc;
@@ -103,18 +105,11 @@ function BookAppointment() {
     if (!validateForm) return;
 
     try {
-      console.log("BEFORE FETCH");
       const response = await fetch("http://localhost:3000/appointments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(appointmentData),
       });
-      console.log("After FETCH");
-
-      console.log("STATUS:", response.status);
-
-      const result = await response.json();
-      console.log("SERVER RESPONSE:", result);
 
       if (!response.ok) {
         throw new Error("Failed to book appointment");

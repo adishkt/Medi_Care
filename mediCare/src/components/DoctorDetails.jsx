@@ -1,9 +1,10 @@
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { DOC_URL } from "../constants";
 import { Link, useParams } from "react-router-dom";
 import { getDoctorAvailability, getSpecialization } from "../utils/doctorData";
 import "./DoctorDetails.css";
 import { ThemeContext } from "../context/ThemeContext";
+import Loader from "./Loader";
 
 function DoctorDetails() {
   const { theme } = useContext(ThemeContext);
@@ -26,7 +27,7 @@ function DoctorDetails() {
   }, []);
 
   if (docInfo === null) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   const { firstName, image, email, phone } = docInfo;

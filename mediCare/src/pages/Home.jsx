@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { DOC_URL } from "../constants";
-import DoctorCard from "../components/DoctorCard";
-import { getSpecialization, specialization } from "../utils/doctorData";
-import { Link } from "react-router-dom";
+import { getSpecialization } from "../utils/doctorData";
 import useDebounce from "../hooks/useDebounce";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/searchBar";
 import FilterBox from "../components/FilterBox";
 import CardList from "../components/CardList";
+import Loader from "../components/Loader";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
   const [selectedText, setSelectedText] = useState("");
   const debounceText = useDebounce(selectedText, 500);
+  const [loading, setLoading] = useState(true);
   const [selectedSpecialization, setSelectedSpecialization] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const doctorsPerPage = 6;
@@ -37,8 +37,10 @@ function Home() {
       const json = await data.json();
       console.log(json.users);
       setDoctors(json.users);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setLoading(false);
     }
   };
 
@@ -49,6 +51,10 @@ function Home() {
   useEffect(() => {
     setCurrentPage(1);
   }, [debounceText, selectedSpecialization]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   const totalPages = Math.ceil(filterDoctor.length / doctorsPerPage);
   const startingIndex = (currentPage - 1) * doctorsPerPage;
