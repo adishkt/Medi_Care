@@ -13,13 +13,8 @@ function useLocalStorage(key,initialValue){
         localStorage.setItem(key,theme);
     },[key,theme]);
 
-
     return[theme,setTheme];
-    
-
-
-    
-
+  
 }
 
 export default useLocalStorage;
