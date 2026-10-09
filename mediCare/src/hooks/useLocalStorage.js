@@ -9,10 +9,6 @@ function useLocalStorage(key,initialValue){
         return initialValue;
     });
 
-
-
-
-    
     useEffect(()=>{
         localStorage.setItem(key,theme);
     },[key,theme]);
