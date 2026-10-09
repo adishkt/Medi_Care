@@ -1,4 +1,123 @@
 @import "tailwindcss";
 
 
+.about-card {
+  max-width: 450px;
+  width: calc(100% - 40px);
+  margin: 40px auto;
+  padding: 35px;
+  border: 1px solid #cbd5e1;
+  border-radius: 16px;
+  text-align: center;
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.about-card h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #2563eb;
+}
+
+.about-description {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.about-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+
+.about-card ul {
+  display: inline-block;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-card li {
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+.about-card li::before {
+  content: "✓";
+  color: #16a34a;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .about-card {
+    padding: 24px 18px;
+    margin: 25px auto;
+  }
+
+  .about-card h1 {
+    font-size: 26px;
+  }
+
+  .about-card h2 {
+    font-size: 20px;
+  }
+}
+
+
+
+.contact-page {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact-card {
+  max-width: 450px;
+  margin: auto;
+  padding: 35px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: white;
+  color: #1f2937;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.contact-description {
+  margin-top: 20px;
+  color: #6b7280;
+}
+
+.contact-info {
+  margin-top: 30px;
+}
+
+.contact-info p {
+  margin: 16px 0;
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  .contact-card {
+    padding: 24px 16px;
+  }
+
+  .contact-card h1 {
+    font-size: 25px;
+  }
+}

@@ -1,8 +1,8 @@
 function About() {
   return (
-    <div className="text-center p-10 border border-gray-500 rounded-xl w-96 mx-auto mt-10 mb-10">
-      <h1 className="text-4xl font-bold">About MediCare</h1>
-      <p className="mt-5">
+    <div className="about-card">
+      <h1 >About MediCare</h1>
+      <p className="about-description">
         MediCare is a simple doctor appointment booking application.
       </p>
       <h2 className="text-2xl font-bold mt-8">Features</h2>
