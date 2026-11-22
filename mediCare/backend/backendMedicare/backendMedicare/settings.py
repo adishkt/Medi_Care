@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # MediCare apps
     "accounts",
     "appointments",
+    "doctors",
 ]
 
 MIDDLEWARE = [
