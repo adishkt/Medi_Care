@@ -23,3 +23,28 @@ class Doctor(models.Model):
         return self.name
     
     
+class DoctorSchedule(models.Model):
+    WEEKDAYS = [
+        (0, 'Monday'),
+        (1, 'Tuesday'),
+        (2, 'Wednesday'),
+        (3, 'Thursday'),
+        (4, 'Friday'),
+        (5, 'Saturday'),
+        (6, 'Sunday'),
+    ]
+    
+    doctor=models.ForeignKey(Doctor,on_delete=models.CASCADE,related_name='schedules')
+    weekday=models.IntegerField(choices=WEEKDAYS)
+    start_time=models.TimeField()
+    end_time=models.TimeField()
+    slot_duration=models.PositiveIntegerField(default=30)
+    is_active=models.BooleanField(default=True)
+    
+    class Meta:
+        unique_together=('doctor','weekday')
+        
+    def __str__(self):
+        return f"{self.doctor.name} - {self.get_weekday_display()}"
+    
+    

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView,RetrieveAPIView
-from .models import Doctor,Specialization
-from .serializers import DoctorSerializer,SpecializationSerializer
+from .models import Doctor,Specialization,DoctorSchedule
+from .serializers import DoctorSerializer,SpecializationSerializer,DoctorScheduleSerializer
 from django.db.models import Q
 
 
@@ -32,3 +32,15 @@ class SpecializationListView(ListAPIView):
 class DoctorDetailView(RetrieveAPIView):
     queryset=Doctor.objects.filter(is_active=True)
     serializer_class=DoctorSerializer
+    
+    
+class DoctorScheduleListView(ListAPIView):
+    serializer_class=DoctorScheduleSerializer
+    
+    def get_queryset(self):
+        queryset=DoctorSchedule.objects.filter(is_active=True)
+        doctor_id=self.request.query_params.get('doctor')
+        if queryset:
+            queryset=queryset.filter(doctor_id=doctor_id)
+            
+        return queryset
